@@ -1,0 +1,17 @@
+{
+	order coraza_waf first
+	admin off
+	persist_config off
+	auto_https off
+}
+
+:8080 {
+	coraza_waf {
+		load_owasp_crs
+		directives `
+		Include /opt/coraza/config/coraza.conf
+		Include @crs-setup.conf.example
+		Include @owasp_crs/*.conf
+		`
+	}
+}
